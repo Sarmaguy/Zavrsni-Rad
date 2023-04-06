@@ -1,4 +1,4 @@
-package zavrsni.webapp.picea.database;
+package zavrsni.webapp.picea.database.models;
 
 public class Producer {
     public String producerName;
