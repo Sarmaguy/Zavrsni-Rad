@@ -1,7 +1,10 @@
 package zavrsni.webapp.picea.database.models;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -13,6 +16,15 @@ import java.util.concurrent.ExecutionException;
  * @version 1.0
  */
 public abstract class DatabaseModel {
+    String id;
+
+    public DatabaseModel(String id) {
+        this.id = id;
+    }
+    public DatabaseModel() {
+        this("");
+    }
+
     /**
      * Method that returns the id of the model
      * @return Id of the model
@@ -27,16 +39,14 @@ public abstract class DatabaseModel {
      * @return Collection of models from the database
      * @param <T> Type of the model that extends DatabaseModel
      */
-    public static  <T extends DatabaseModel> List<T> getAll(Firestore db, Class t) {
+    public static  <T extends DatabaseModel> List<T> getAll(Firestore db, Class<T> t) {
         String collectionName = t.getSimpleName();
         CollectionReference ref = db.collection(collectionName);
         List<T> list = null;
 
         try {
             list =  ref.get().get().toObjects(t);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 
@@ -51,16 +61,14 @@ public abstract class DatabaseModel {
      * @return Model from the database
      * @param <T> Type of the model that extends DatabaseModel
      */
-    public static  <T extends DatabaseModel> T get(Firestore db, Class t, String id) {
+    public static  <T extends DatabaseModel> T get(Firestore db, Class<T> t, String id) {
         String collectionName = t.getSimpleName();
         String path = collectionName + "/" + id;
         T model = null;
 
         try {
             model = (T) db.document(path).get().get().toObject(t);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
 
@@ -74,13 +82,49 @@ public abstract class DatabaseModel {
      * @param model Model to be updated
      * @param <T> Type of the model that extends DatabaseModel
      */
-    public static <T extends DatabaseModel> void update(Firestore db, T model) {
+    public static <T extends DatabaseModel> ApiFuture<WriteResult> update(Firestore db, T model) {
         String collectionName = model.getClass().getSimpleName();
         String path = collectionName + "/" + model.getId();
 
-        db.document(path).set(model);
+        return db.document(path).set(model);
     }
 
+    /**
+     * Default implementation of create method for all models that extend DatabaseModel
+     * @param db Firestore instance
+     * @param model Model to be created
+     * @return ApiFuture of the operation
+     * @param <T> Type of the model that extends DatabaseModel
+     */
+    public static <T extends DatabaseModel> ApiFuture<WriteResult> create(Firestore db, T model) {
+        String collectionName = model.getClass().getSimpleName();
+
+        String id = db.collection(collectionName).document().getId();
+        model.setId(id);
+
+        String path = collectionName + "/" + id;
+
+        return db.document(path).set(model);
+    }
+
+    /**
+     * Default implementation of delete method for all models that extend DatabaseModel
+     * @param db Firestore instance
+     * @param id Id of the model to be deleted
+     * @param t Class of the model
+     * @return ApiFuture of the operation
+     * @param <T> Type of the model that extends DatabaseModel
+     */
+    public static <T extends DatabaseModel> ApiFuture<WriteResult> delete(Firestore db, String id, Class<T> t) {
+        String collectionName = t.getSimpleName();
+        String path = collectionName + "/" + id;
+
+        return db.document(path).delete();
+    }
+
+    void setId(String id) {
+        this.id = id;
+    }
 
 
 }
