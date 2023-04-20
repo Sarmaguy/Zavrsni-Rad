@@ -42,8 +42,7 @@ public abstract class DatabaseModel {
     public static  <T extends DatabaseModel> List<T> getAll(Firestore db, Class<T> t) {
         String collectionName = t.getSimpleName();
         CollectionReference ref = db.collection(collectionName);
-        List<T> list = null;
-
+        List<T> list;
         try {
             list =  ref.get().get().toObjects(t);
         } catch (ExecutionException | InterruptedException e) {
@@ -64,10 +63,10 @@ public abstract class DatabaseModel {
     public static  <T extends DatabaseModel> T get(Firestore db, Class<T> t, String id) {
         String collectionName = t.getSimpleName();
         String path = collectionName + "/" + id;
-        T model = null;
+        T model;
 
         try {
-            model = (T) db.document(path).get().get().toObject(t);
+            model = db.document(path).get().get().toObject(t);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

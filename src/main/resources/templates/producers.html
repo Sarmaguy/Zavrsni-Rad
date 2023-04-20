@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Producers</title>
+</head>
+<body>
+<h1>List of Producers</h1>
+<ul>
+    <li th:each="producer : ${producers}" th:text="${producer.producerName}"></li>
+</ul>
+</body>
+</html>
