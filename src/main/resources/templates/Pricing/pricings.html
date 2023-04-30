@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pricing List</title>
+</head>
+<body>
+<h1>List of Pricings</h1>
+<ul>
+    <li th:each="pricing : ${pricings}">
+        <span th:text="${pricing.getSortName()}"></span> - <span th:text="${pricing.getPricingSize()}"></span> - <span th:text="${pricing.getPricingPrice()}"></span> - <span th:text="${pricing.getSeason()}"></span>
+        <form th:action="@{/admin/update/pricing/{id}(id=${pricing.getId()})}" method="post">
+            <input type="hidden" name="_method" value="post" />
+            <button type="submit">Update</button>
+        </form>
+        <form th:action="@{/admin/delete/pricing/{id}(id=${pricing.getId()})}" method="post">
+            <input type="hidden" name="_method" value="post" />
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+<p><a href="/admin/new/pricing">Create new pricing</a></p>
+</body>
+</html>

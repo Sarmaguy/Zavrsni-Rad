@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create new Pricing</title>
+</head>
+<body>
+<h1>Create new Pricing</h1>
+<form action="/admin/save/pricing" method="post">
+  <label for="pricingSize">Size:</label>
+  <input type="text" id="pricingSize" name="pricingSize"><br><br>
+  <label for="sortName">Sort name:</label>
+  <select id="sortName" name="sortId">
+    <option th:each="sort : ${sorts}" th:value="${sort.id}" th:text="${sort.sortName}"></option>
+  </select><br><br>
+  <label for="pricingPrice">Price:</label>
+  <input type="text" id="pricingPrice" name="pricingPrice"><br><br>
+  <label for="season">Season:</label>
+  <input type="text" id="season" name="season"><br><br>
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>

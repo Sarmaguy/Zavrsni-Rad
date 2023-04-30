@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Pricing</title>
+</head>
+<body>
+<h1>Edit Pricing</h1>
+<form th:action="@{/admin/save/pricing/{id}(id=${pricing.id})}" method="post">
+  <div>
+    <label for="size">Size:</label>
+    <input type="text" id="size" name="pricingSize" th:value="${pricing.pricingSize}" />
+  </div>
+  <div>
+    <label for="sort">Sort:</label>
+    <select id="sort" name="sortId">
+      <option th:each="sort : ${sorts}"
+              th:value="${sort.id}"
+              th:selected="${sort.id == pricing.sortId}">
+        <span th:text="${sort.sortName}"></span>
+      </option>
+    </select>
+  </div>
+  <div>
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="pricingPrice" th:value="${pricing.pricingPrice}" />
+  </div>
+  <div>
+    <label for="season">Season:</label>
+    <input type="text" id="season" name="season" th:value="${pricing.season}" />
+  </div>
+  <button type="submit">Save</button>
+</form>
+</body>
+</html>
