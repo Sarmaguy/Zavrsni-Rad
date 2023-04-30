@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Harvest</title>
+</head>
+<body>
+<h1>Edit Harvest</h1>
+<form th:action="@{/admin/save/harvest/{id}(id=${harvest.id})}" method="post">
+  <div>
+    <label for="sort">Sort:</label>
+    <select id="sort" name="sortId">
+      <option th:each="sort : ${sorts}"
+              th:value="${sort.id}"
+              th:selected="${sort.id == harvest.sortId}">
+        <span th:text="${sort.sortName}"></span>
+      </option>
+    </select>
+  </div>
+  <div>
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" name="amount" th:value="${harvest.amount}" />
+  </div>
+  <div>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" th:value="${harvest.date}" />
+  </div>
+  <button type="submit">Save</button>
+</form>
+</body>
+</html>

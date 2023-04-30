@@ -9,21 +9,21 @@ import java.util.List;
 public class Harvest extends DatabaseModel {
     private String sortId;
     private String date;
-    private double amount;
+    private int amount;
 
-    public Harvest(String id, String sortId, String date, double amount) {
+    public Harvest(String id, String sortId, String date, int amount) {
         super(id);
         this.sortId = sortId;
         this.date = date;
         this.amount = amount;
     }
 
-    public Harvest(String sortId, String date, double amount) {
+    public Harvest(String sortId, String date, int amount) {
         this("", sortId, date, amount);
     }
 
     public Harvest() {
-        this("", "", 0.0);
+        this("", "", 0);
     }
 
     public String getSortId() {
@@ -42,11 +42,11 @@ public class Harvest extends DatabaseModel {
         this.date = date;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
