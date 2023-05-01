@@ -10,10 +10,10 @@ import java.util.List;
 public class Planting extends DatabaseModel {
     private String producerId;
     private String sortId;
-    private double amount;
-    private double year;
+    private int amount;
+    private int year;
 
-    public Planting(String id, String producerId, String sortId, double amount, double year) {
+    public Planting(String id, String producerId, String sortId, int amount, int year) {
         super(id);
         this.producerId = producerId;
         this.sortId = sortId;
@@ -21,12 +21,12 @@ public class Planting extends DatabaseModel {
         this.year = year;
     }
 
-    public Planting(String producerId, String sortId, double amount, double year) {
+    public Planting(String producerId, String sortId, int amount, int year) {
         this("", producerId, sortId, amount, year);
     }
 
     public Planting() {
-        this("", "", "", 0.0, 0.0);
+        this("", "", "", 0, 0);
     }
 
     public String getProducerId() {
@@ -45,19 +45,19 @@ public class Planting extends DatabaseModel {
         this.sortId = sortId;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
-    public double getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(double year) {
+    public void setYear(int year) {
         this.year = year;
     }
 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Producer</title>
+</head>
+<body>
+<h1>Edit Producer</h1>
+<form th:action="@{/admin/save/producer/{id}(id=${producer.id})}" method="post">
+    <div>
+        <label for="producerName">Name:</label>
+        <input type="text" id="producerName" name="producerName" th:value="${producer.producerName}" />
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Sort</title>
+</head>
+<body>
+<h1>Edit Sort</h1>
+<form th:action="@{/admin/save/sort/{id}(id=${sort.id})}" method="post">
+  <div>
+    <label for="sortName">Name:</label>
+    <input type="text" id="sortName" name="sortName" th:value="${sort.sortName}" />
+  </div>
+  <div>
+    <label for="latin">Latin name:</label>
+    <input type="text" id="latin" name="latin" th:value="${sort.latin}" />
+  </div>
+  <button type="submit">Save</button>
+</form>
+</body>
+</html>

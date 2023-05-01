@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantings</title>
+</head>
+<body>
+<h1>List of Plantings</h1>
+<ul>
+    <li th:each="planting : ${plantings}">
+        <span th:text="${planting.getProducerName()}"></span> - <span th:text="${planting.getSortName()}"></span> - <span th:text="${planting.amount}"></span> - <span th:text="${planting.year}"></span>
+        <form th:action="@{/admin/update/planting/{id}(id=${planting.id})}" method="post">
+            <input type="hidden" name="_method" value="post" />
+            <button type="submit">Update</button>
+        </form>
+        <form th:action="@{/admin/delete/planting/{id}(id=${planting.id})}" method="post">
+            <input type="hidden" name="_method" value="post" />
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+<p><a href="/admin/new/planting">Create new planting</a></p>
+</body>
+</html>

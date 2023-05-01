@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create new sort</title>
+</head>
+<body>
+<h1>Create new sort</h1>
+
+<form action="/admin/save/sort" method="post">
+  <label for="sortName">Sort name:</label>
+  <input type="text" id="sortName" name="sortName"><br><br>
+  <label for="latin">Latin name:</label>
+  <input type="text" id="latin" name="latin"><br><br>
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>

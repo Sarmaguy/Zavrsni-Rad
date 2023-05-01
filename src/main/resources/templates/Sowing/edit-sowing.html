@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Sowing</title>
+</head>
+<body>
+<h1>Edit Sowing</h1>
+<form th:action="@{/admin/save/sowing/{id}(id=${sowing.id})}" method="post">
+  <div>
+    <label for="producer">Producer:</label>
+    <select id="producer" name="producerId">
+      <option th:each="producer : ${producers}"
+              th:value="${producer.id}"
+              th:selected="${producer.id == sowing.producerId}">
+        <span th:text="${producer.producerName}"></span>
+      </option>
+    </select>
+  </div>
+  <div>
+    <label for="sort">Sort:</label>
+    <select id="sort" name="sortId">
+      <option th:each="sort : ${sorts}"
+              th:value="${sort.id}"
+              th:selected="${sort.id == sowing.sortId}">
+        <span th:text="${sort.sortName}"></span>
+      </option>
+    </select>
+  </div>
+  <div>
+    <label for="year">Year:</label>
+    <input type="text" id="year" name="year" th:value="${sowing.year}" />
+  </div>
+  <button type="submit">Save</button>
+</form>
+</body>
+</html>

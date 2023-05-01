@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Producers</title>
+</head>
+<body>
+<h1>List of Producers</h1>
+<ul>
+    <li th:each="producer : ${producers}">
+        <span th:text="${producer.producerName}"></span>
+        <form th:action="@{/admin/update/producer/{id}(id=${producer.id})}" method="post">
+            <input type="hidden" name="_method" value="post" />
+            <button type="submit">Update</button>
+        </form>
+        <form th:action="@{/admin/delete/producer/{id}(id=${producer.id})}" method="post">
+            <input type="hidden" name="_method" value="post" />
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+
+<p><a href="/admin/new/producer">Create new producer</a></p>
+</body>
+</html>
