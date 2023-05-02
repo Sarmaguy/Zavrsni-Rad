@@ -8,7 +8,7 @@
 <h1>List of Pricings</h1>
 <ul>
     <li th:each="pricing : ${pricings}">
-        <span th:text="${pricing.getSortName()}"></span> - <span th:text="${pricing.getPricingSize()}"></span> - <span th:text="${pricing.getPricingPrice()}"></span> - <span th:text="${pricing.getSeason()}"></span>
+        <span th:text="${pricing.getSortName()}"></span> - <span th:text="${pricing.getPrice()}"></span> - <span th:text="${pricing.getSize()}"></span> - <span th:text="${pricing.getSeason()}"></span>
         <form th:action="@{/admin/update/pricing/{id}(id=${pricing.getId()})}" method="post">
             <input type="hidden" name="_method" value="post" />
             <button type="submit">Update</button>

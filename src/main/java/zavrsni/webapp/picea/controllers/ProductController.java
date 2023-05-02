@@ -38,6 +38,14 @@ public class ProductController {
     @GetMapping("/admin/new/product")
     public String showCreateProductForm(Model model) {
         List<Sort> sorts = Sort.getAll(db);
+        List<Sowing> sowings = Sowing.getAll(db);
+        List<Planting> plantings = Planting.getAll(db);
+        List<Harvest> harvests = Harvest.getAll(db);
+        List<Pricing> pricings = Pricing.getAll(db);
+        model.addAttribute("sowings", sowings);
+        model.addAttribute("plantings", plantings);
+        model.addAttribute("harvests", harvests);
+        model.addAttribute("pricings", pricings);
         model.addAttribute("sorts", sorts);
         model.addAttribute("product", new Product());
         return "Product/create-product";
@@ -49,6 +57,7 @@ public class ProductController {
         return "redirect:/admin/products";
     }
 
+    /*
     @PostMapping("/admin/save/product/{id}")
     public String saveProduct(@PathVariable("id") String id, @RequestParam("productName") String productName, @RequestParam("productDescription") String productDescription, @RequestParam("productImageURL") String productImageURL, @RequestParam("productPrice") String productPrice, @RequestParam("sortId") String sortId) {
         Product product = Product.get(db, id);
@@ -60,6 +69,8 @@ public class ProductController {
         Product.update(db, product);
         return "redirect:/admin/products";
     }
+
+     */
 
     @PostMapping("/admin/update/product/{id}")
     public String updateProduct(@PathVariable("id") String id, Model model) {

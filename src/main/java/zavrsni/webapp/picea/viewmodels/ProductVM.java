@@ -94,6 +94,7 @@ public class ProductVM {
             catch (Exception e){
                 model.priceInfo = "N/A";
             }
+            models.add(model);
 
         }
         return models;
@@ -163,11 +164,11 @@ public class ProductVM {
         this.description = description;
     }
 
-    public boolean isInPot() {
+    public String isInPot() {
         return inPot;
     }
 
-    public void setInPot(boolean inPot) {
+    public void setInPot(String inPot) {
         this.inPot = inPot;
     }
 }

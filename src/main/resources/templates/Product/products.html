@@ -8,7 +8,7 @@
 <h1>List of Products</h1>
 <ul>
     <li th:each="product : ${products}">
-        <span th:text="${product.getSortName()}"></span> - year of sowing:  <span th:text="${product.getSowingInfo()}"></span> - year of planting:  <span th:text="${product.getPlantingInfo()}"></span> - harvested on:  <span th:text="${product.getHarvestInfo()}"></span> - Price:  <span th:text="${product.getPriceInfo()}"></span> - <span th:text="${product.getDescription()}"></span> - <span th:text="${product.inPot}"></span>
+        <span th:text="${product.getSortName()}"></span> - year of sowing:  <span th:text="${product.getSowingInfo()}"></span> - year of planting:  <span th:text="${product.getPlantingInfo()}"></span> - harvested on:  <span th:text="${product.getHarvestInfo()}"></span> - Price:  <span th:text="${product.getPriceInfo()}"></span> - <span th:text="${product.getDescription()}"></span> - <span th:text="${product.isInPot()}"></span>
         <form th:action="@{/admin/update/product/{id}(id=${product.id})}" method="post">
             <input type="hidden" name="_method" value="post" />
             <button type="submit">Update</button>
