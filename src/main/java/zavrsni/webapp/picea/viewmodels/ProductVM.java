@@ -1,5 +1,6 @@
 package zavrsni.webapp.picea.viewmodels;
 
+import com.google.cloud.firestore.Firestore;
 import zavrsni.webapp.picea.database.models.*;
 
 import java.util.ArrayList;
@@ -30,26 +31,6 @@ public class ProductVM {
         this.description = description;
     }
 
-    /*
-    public static List<PricingVM> from(List<Pricing> pricings, List<Sort> sorts) {
-        List<PricingVM> models = new ArrayList<>();
-
-        for (Pricing pricing : pricings) {
-            PricingVM model = new PricingVM();
-            model.Id = pricing.getId();
-            model.size = pricing.getPricingSize();
-            model.price = pricing.getPricingPrice();
-            model.season = pricing.getSeason();
-            try {
-                model.sortName = sorts.stream().filter(s -> s.getId().equals(pricing.getSortId())).findFirst().get().getSortName();
-            } catch (Exception e) {
-                model.sortName = "N/A";
-            }
-            models.add(model);
-        }
-        return models;
-    }
-    */
     public static List<ProductVM> from(List<Product> products, List<Sort> sorts, List<Sowing> sowings, List<Planting> plantings, List<Harvest> harvests, List<Pricing> pricings) {
         List<ProductVM> models = new ArrayList<>();
 
@@ -98,6 +79,33 @@ public class ProductVM {
 
         }
         return models;
+    }
+
+    public static List<ProductVM> fromHome(List<Product> products, List<Sort> sorts, List<Sowing> sowings, List<Planting> plantings, List<Harvest> harvests, List<Pricing> pricings, List<Reservation> reservations){
+        List<ProductVM> allModels = from(products, sorts, sowings, plantings, harvests, pricings);
+        List<ProductVM> models = new ArrayList<>();
+
+        for (ProductVM model : allModels){
+            if (reservations.stream().noneMatch(r -> r.getProductId().equals(model.getId()))){
+                models.add(model);
+            }
+        }
+        return models;
+    }
+
+    public static ProductVM from(Product product, Firestore db) {
+        ProductVM model = new ProductVM();
+        model.id = product.getId();
+        model.productSize = product.getProductSize();
+        model.description = product.getDescription();
+        model.inPot = product.isInPot() ? "Product is in pot" : "Product is not in pot";
+        model.sortName = Sort.get(db, product.getSortId()).getSortName();
+        model.sowingInfo = String.valueOf(Sowing.get(db, product.getSowingId()).getYear());
+        model.plantingInfo = String.valueOf(Planting.get(db, product.getPlantingId()).getYear());
+        model.harvestInfo = String.valueOf(Harvest.get(db, product.getHarvestId()).getDate());
+        model.priceInfo = String.valueOf(Pricing.get(db, product.getPriceId()).getPricingPrice());
+
+        return model;
     }
 
     public String getId() {

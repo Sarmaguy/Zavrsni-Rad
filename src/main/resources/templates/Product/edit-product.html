@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Product</title>
 </head>
 <body>
-
+<h1>Edit Product</h1>
+<form th:action="@{/admin/save/product/{id}(id=${product.id})}" method="post">
+    <input type="hidden" id="productId" name="productId" th:value="${product.id}">
+    <label for="sortName">Sort name:</label>
+    <select id="sortName" name="sortId">
+        <option th:each="sort : ${sorts}" th:value="${sort.id}" th:text="${sort.sortName}" th:selected="${sort.id == product.sortId}"></option>
+    </select><br><br>
+    <label for="sowingName">Sowing year:</label>
+    <select id="sowingName" name="sowingId">
+        <option th:each="sow : ${sowings}" th:value="${sow.id}" th:text="${sow.year}" th:selected="${sow.id == product.sowingId}"></option>
+    </select><br><br>
+    <label for="plantingName">Planting year:</label>
+    <select id="plantingName" name="plantingId">
+        <option th:each="planting : ${plantings}" th:value="${planting.id}" th:text="${planting.year}" th:selected="${planting.id == product.plantingId}"></option>
+    </select><br><br>
+    <label for="harvestName">Harvest year:</label>
+    <select id="harvestName" name="harvestId">
+        <option th:each="harvest : ${harvests}" th:value="${harvest.id}" th:text="${harvest.date}" th:selected="${harvest.id == product.harvestId}"></option>
+    </select><br><br>
+    <label for="priceId">Price:</label>
+    <select id="priceId" name="priceId">
+        <option th:each="price : ${pricings}" th:value="${price.id}" th:text="${price.pricingPrice}" th:selected="${price.id == product.priceId}"></option>
+    </select><br><br>
+    <label for="productSize">Size:</label>
+    <input type="text" id="productSize" name="productSize" th:value="${product.productSize}"><br><br>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" th:value="${product.description}"><br><br>
+    <label for="inPot">In Pot:</label>
+    <input type="checkbox" id="inPot" name="inPot" value="true" th:checked="${product.inPot}"><br><br>
+    <input type="submit">
+</form>
 </body>
 </html>

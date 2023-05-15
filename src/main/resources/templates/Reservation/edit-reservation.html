@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Reservation</title>
+</head>
+<body>
+<h1>Edit Reservation</h1>
+<form th:action="@{/admin/save/reservation/{id}(id=${reservation.id})}" method="post">
+    <div>
+        <label for="productId">Product ID:</label>
+        <select id="productId" name="productId">
+            <option th:each="product : ${products}"
+                    th:value="${product.id}"
+                    th:text="${product.id}"
+                    th:selected="${product.id == reservation.productId}">
+            </option>
+        </select>
+    </div>
+    <div>
+    <div>
+        <label for="reservationName">Name:</label>
+        <input type="text" id="reservationName" name="reservationName" th:value="${reservation.reservationName}" />
+    </div>
+    <div>
+        <label for="reservationSurname">Surname:</label>
+        <input type="text" id="reservationSurname" name="reservationSurname" th:value="${reservation.reservationSurname}" />
+    </div>
+    <div>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" th:value="${reservation.phoneNumber}" />
+    </div>
+    <div>
+        <label for="info">Info:</label>
+        <textarea id="info" name="info" rows="5" cols="50" th:text="${reservation.info}"></textarea>
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

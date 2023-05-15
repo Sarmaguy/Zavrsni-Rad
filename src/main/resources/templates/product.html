@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+</head>
+<body>
+<a href="/admin/products">Back to products</a><br>
+Sort name: <span th:text="${product.getSortName()}"></span><br>
+Size: <span th:text="${product.productSize}"></span><br>
+Year of sowing: <span th:text="${product.getSowingInfo()}"></span><br>
+Year of planting: <span th:text="${product.getPlantingInfo()}"></span><br>
+Harvested on: <span th:text="${product.getHarvestInfo()}"></span><br>
+Price: <span th:text="${product.getPriceInfo()}"></span><br>
+Description: <span th:text="${product.getDescription()}"></span><br>
+In pot: <span th:text="${product.isInPot()}"></span><br>
+<br>
+<form th:action="@{/reserve/{id}(id=${product.id})}" method="post">
+    <input type="hidden" name="_method" value="post" />
+    <button type="submit">Rezerviraj</button>
+
+
+</body>
+</html>

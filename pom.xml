@@ -23,6 +23,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>chartjs</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -40,10 +46,40 @@
 
         <dependency>
             <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-storage</artifactId>
+            <version>19.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.firebase</groupId>
             <artifactId>firebase-admin</artifactId>
             <version>6.11.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-bom</artifactId>
+            <version>30.0.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>google-maven</id>
+            <name>Google Maven</name>
+            <url>https://maven.google.com</url>
+        </repository>
+
+        <repository>
+            <id>firebase</id>
+            <url>https://firebase.google.com/docs/android/setup#add_the_sdk</url>
+        </repository>
+
+    </repositories>
+
 
     <build>
         <plugins>

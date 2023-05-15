@@ -57,25 +57,42 @@ public class ProductController {
         return "redirect:/admin/products";
     }
 
-    /*
+
     @PostMapping("/admin/save/product/{id}")
-    public String saveProduct(@PathVariable("id") String id, @RequestParam("productName") String productName, @RequestParam("productDescription") String productDescription, @RequestParam("productImageURL") String productImageURL, @RequestParam("productPrice") String productPrice, @RequestParam("sortId") String sortId) {
+    public String saveProduct(@PathVariable("id") String id, @RequestParam("sortId") String sortId,
+                           @RequestParam("sowingId") String sowingId,
+                           @RequestParam("plantingId") String plantingId,
+                           @RequestParam("harvestId") String harvestId,
+                           @RequestParam("priceId") String priceId,
+                           @RequestParam("productSize") String productSize,
+                           @RequestParam("description") String description,
+                           @RequestParam("inPot") boolean inPot) {
         Product product = Product.get(db, id);
-        product.setProductName(productName);
-        product.setProductDescription(productDescription);
-        product.setProductImageURL(productImageURL);
-        product.setProductPrice(productPrice);
         product.setSortId(sortId);
+        product.setSowingId(sowingId);
+        product.setPlantingId(plantingId);
+        product.setHarvestId(harvestId);
+        product.setPriceId(priceId);
+        product.setProductSize(productSize);
+        product.setDescription(description);
+        product.setInPot(inPot);
         Product.update(db, product);
         return "redirect:/admin/products";
     }
 
-     */
 
     @PostMapping("/admin/update/product/{id}")
     public String updateProduct(@PathVariable("id") String id, Model model) {
         Product product = Product.get(db, id);
         List<Sort> sorts = Sort.getAll(db);
+        List<Sowing> sowings = Sowing.getAll(db);
+        List<Planting> plantings = Planting.getAll(db);
+        List<Harvest> harvests = Harvest.getAll(db);
+        List<Pricing> pricings = Pricing.getAll(db);
+        model.addAttribute("sowings", sowings);
+        model.addAttribute("plantings", plantings);
+        model.addAttribute("harvests", harvests);
+        model.addAttribute("pricings", pricings);
         model.addAttribute("sorts", sorts);
         model.addAttribute("product", product);
         return "Product/edit-product";
