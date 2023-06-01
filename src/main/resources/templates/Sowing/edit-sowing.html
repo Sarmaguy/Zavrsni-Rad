@@ -3,13 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>Edit Sowing</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 <h1>Edit Sowing</h1>
 <form th:action="@{/admin/save/sowing/{id}(id=${sowing.id})}" method="post">
-  <div>
+  <div class="form-group">
     <label for="producer">Producer:</label>
-    <select id="producer" name="producerId">
+    <select id="producer" name="producerId" class="form-control">
       <option th:each="producer : ${producers}"
               th:value="${producer.id}"
               th:selected="${producer.id == sowing.producerId}">
@@ -17,9 +55,9 @@
       </option>
     </select>
   </div>
-  <div>
+  <div class="form-group">
     <label for="sort">Sort:</label>
-    <select id="sort" name="sortId">
+    <select id="sort" name="sortId" class="form-control">
       <option th:each="sort : ${sorts}"
               th:value="${sort.id}"
               th:selected="${sort.id == sowing.sortId}">
@@ -27,11 +65,19 @@
       </option>
     </select>
   </div>
-  <div>
+  <div class="form-group">
     <label for="year">Year:</label>
-    <input type="text" id="year" name="year" th:value="${sowing.year}" />
+    <input type="text" id="year" name="year" class="form-control" th:value="${sowing.year}" />
   </div>
-  <button type="submit">Save</button>
+    <div class="form-group">
+        <label for="location">location:</label>
+        <input type="text" id="location" name="location" class="form-control" th:value="${sowing.location}" />
+</div>
+  <button type="submit" class="btn btn-primary">Save</button>
 </form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

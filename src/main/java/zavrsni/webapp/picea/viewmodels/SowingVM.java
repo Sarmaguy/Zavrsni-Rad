@@ -12,15 +12,17 @@ public class SowingVM {
     private String producerName;
     private int year;
     private String id;
+    private String location;
 
     public SowingVM() {
     }
 
-    public SowingVM(String sortName, String producerName, int year, String id) {
+    public SowingVM(String sortName, String producerName, int year, String id, String location) {
         this.sortName = sortName;
         this.producerName = producerName;
         this.year = year;
         this.id = id;
+        this.location = location;
     }
 
     public String getSortName() {
@@ -51,6 +53,15 @@ public class SowingVM {
         return id;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+
     public static List<SowingVM> from(List<Sowing> sowings, List<Producer> producers, List<Sort> sorts) {
         List<SowingVM> models = new ArrayList<>();
 
@@ -58,6 +69,7 @@ public class SowingVM {
             SowingVM model = new SowingVM();
             model.year = sowing.getYear();
             model.id = sowing.getId();
+            model.location = sowing.getLocation();
             try {
                 model.producerName = producers.stream().filter(p -> p.getId().equals(sowing.getProducerId())).findFirst().get().getProducerName();
             } catch (Exception e) {

@@ -3,22 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
+    <th:block th:include="header::head" />
+    <th:block th:include="header::body" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product-image {
+            width: 50px;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .actions form {
+            margin-left: 10px;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <h1>List of Products</h1>
-<ul>
-    <li th:each="product : ${products}">
-        <span th:text="${product.getSortName()}"></span> - year of sowing:  <span th:text="${product.getSowingInfo()}"></span> - year of planting:  <span th:text="${product.getPlantingInfo()}"></span> - harvested on:  <span th:text="${product.getHarvestInfo()}"></span> - Price:  <span th:text="${product.getPriceInfo()}"></span> - <span th:text="${product.getDescription()}"></span> - <span th:text="${product.isInPot()}"></span>
-        <form th:action="@{/admin/update/product/{id}(id=${product.id})}" method="post">
-            <input type="hidden" name="_method" value="post" />
-            <button type="submit">Update</button>
-        </form>
-        <form th:action="@{/admin/delete/product/{id}(id=${product.id})}" method="post">
-            <input type="hidden" name="_method" value="post" />
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
-<p><a href="/admin/new/product">Create new product</a></p>
+<table>
+    <thead>
+    <tr>
+        <th>Image</th>
+        <th>Sort Name</th>
+        <th>Year of Sowing</th>
+        <th>Year of Planting</th>
+        <th>Harvested On</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>In Pot</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td><img th:src="${product.getPictureUrl()}" alt="Product Image" class="product-image"></td>
+        <td th:text="${product.getSortName()}"></td>
+        <td th:text="${product.getSowingInfo()}"></td>
+        <td th:text="${product.getPlantingInfo()}"></td>
+        <td th:text="${product.getHarvestInfo()}"></td>
+        <td th:text="${product.getPriceInfo()}"></td>
+        <td th:text="${product.getDescription()}"></td>
+        <td th:text="${product.isInPot()}"></td>
+        <td class="actions">
+            <form th:action="@{/admin/update/product/{id}(id=${product.id})}" method="post">
+                <input type="hidden" name="_method" value="post"/>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+            <form th:action="@{/admin/delete/product/{id}(id=${product.id})}" method="post">
+                <input type="hidden" name="_method" value="post"/>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p><a href="/admin/new/product/sort" class="btn btn-success">Create new product</a></p>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

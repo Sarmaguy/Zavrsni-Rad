@@ -3,37 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <title>Create new Product</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            margin-top: 10px;
+        }
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<h1>Create new Product</h1>
+<h1>Create new <span th:text="${sort.sortName}"></span></h1>
 <form action="/admin/save/product" method="post">
-    <label for="sortName">Sort name:</label>
-    <select id="sortName" name="sortId">
-        <option th:each="sort : ${sorts}" th:value="${sort.id}" th:text="${sort.sortName}"></option>
-    </select><br><br>
-    <label for="sowingName">Sowing year:</label>
-    <select id="sowingName" name="sowingId">
-        <option th:each="sow : ${sowings}" th:value="${sow.id}" th:text="${sow.year}"></option>
-    </select><br><br>
-    <label for="plantingName">Planting year:</label>
-    <select id="plantingName" name="plantingId">
-        <option th:each="planting : ${plantings}" th:value="${planting.id}" th:text="${planting.year}"></option>
-    </select><br><br>
-    <label for="harvestName">Harvest year:</label>
-    <select id="harvestName" name="harvestId">
-        <option th:each="harvest : ${harvests}" th:value="${harvest.id}" th:text="${harvest.date}"></option>
-</select><br><br>
-    <label for="priceId">Price:</label>
-    <select id="priceId" name="priceId">
-        <option th:each="price : ${pricings}" th:value="${price.id}" th:text="${price.pricingPrice}"></option>
-</select><br><br>
-    <label for="productSize">Size:</label>
-    <input type="text" id="productSize" name="productSize"><br><br>
-    <label for="description">Description:</label>
-    <input type="text" id="description" name="description"><br><br>
-    <label for="inPot">In Pot:</label>
-    <input type="checkbox" id="inPot" name="inPot" value="true"><br><br>
-    <input type="submit" value="Submit">
+    <div class="form-group">
+        <label for="sortName">Sort name:</label>
+        <select id="sortName" name="sortId" class="form-control" th:readonly>
+            <option th:value="${sort.id}" th:text="${sort.sortName}"></option>
+        </select>
+    </div><br>
+    <div class="form-group">
+        <label for="sowingName">Sowing year:</label>
+        <select id="sowingName" name="sowingId" class="form-control">
+            <option th:each="sow : ${sowings}" th:value="${sow.id}" th:text="${sow.year}"></option>
+        </select>
+    </div><br>
+    <div class="form-group">
+        <label for="plantingName">Planting year:</label>
+        <select id="plantingName" name="plantingId" class="form-control">
+            <option th:each="planting : ${plantings}" th:value="${planting.id}" th:text="${planting.year}"></option>
+        </select>
+    </div><br>
+    <div class="form-group">
+        <label for="harvestName">Harvest year:</label>
+        <select id="harvestName" name="harvestId" class="form-control">
+            <option th:each="harvest : ${harvests}" th:value="${harvest.id}" th:text="${harvest.date}"></option>
+        </select>
+    </div><br>
+    <div class="form-group">
+        <label for="priceId">Price:</label>
+        <select id="priceId" name="priceId" class="form-control">
+            <option th:each="price : ${pricings}" th:value="${price.id}" th:text="${price.pricingPrice}"></option>
+        </select>
+    </div><br>
+    <div class="form-group">
+        <label for="productSize">Size:</label>
+        <input type="text" id="productSize" name="productSize" class="form-control">
+    </div><br>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" class="form-control">
+    </div><br>
+    <div class="form-group">
+        <label for="picture">Picture URL:</label>
+        <input type="text" id="picture" name="picture" class="form-control">
+    </div><br>
+    <div class="form-group">
+        <label for="inPot">In Pot:</label>
+        <input type="checkbox" id="inPot" name="inPot" value="true">
+    </div><br>
+    <input type="submit" value="Submit" class="btn btn-primary">
 </form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

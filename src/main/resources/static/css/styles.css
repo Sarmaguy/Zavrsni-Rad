@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #67b867;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+.app-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+.links {
+    display: flex;
+}
+.links a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease-in-out;
+}
+.links a:hover {
+    color: #fff7a5;
+}

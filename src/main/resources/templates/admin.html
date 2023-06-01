@@ -3,18 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Panel</title>
+    <th:block th:include="header::head" />
+    <th:block th:include="header::body" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 40px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .admin-links {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+        .admin-links li {
+            margin-bottom: 10px;
+        }
+        .admin-links a {
+            display: block;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            color: #007bff;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .admin-links a:hover {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Admin Panel</h1>
-<p><a href="/admin/producers">Producers</a></p>
-<p><a href="/admin/sorts">Sorts</a></p>
-<p><a href="/admin/sowings">Sowings</a></p>
-<p><a href="/admin/plantings">Plantings</a></p>
-<p><a href="/admin/harvests">Harvests</a></p>
-<p><a href="/admin/pricings">Pricings</a></p>
-<p><a href="/admin/products">Products</a></p>
-<p><a href="/admin/reservations">Reservations</a></p>
+<div class="container">
+    <h1>Admin Panel</h1>
+    <ul class="admin-links">
+        <li><a href="/admin/producers">Producers</a></li>
+        <li><a href="/admin/sorts">Sorts</a></li>
+        <li><a href="/admin/sowings">Sowings</a></li>
+        <li><a href="/admin/plantings">Plantings</a></li>
+        <li><a href="/admin/harvests">Harvests</a></li>
+        <li><a href="/admin/pricings">Pricings</a></li>
+        <li><a href="/admin/products">Products</a></li>
+        <li><a href="/admin/reservations">Reservations</a></li>
+    </ul>
+</div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

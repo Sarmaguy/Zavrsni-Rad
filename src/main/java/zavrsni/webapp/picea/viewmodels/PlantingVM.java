@@ -12,17 +12,19 @@ public class PlantingVM {
     private String sortName;
     private int amount;
     private int year;
+    private String location;
 
-    public PlantingVM(String id, String producerName, String sortName, int amount, int year) {
+    public PlantingVM(String id, String producerName, String sortName, int amount, int year, String location) {
         this.id = id;
         this.producerName = producerName;
         this.sortName = sortName;
         this.amount = amount;
         this.year = year;
+        this.location = location;
     }
 
     public PlantingVM() {
-        this("", "", "", 0, 0);
+        this("", "", "", 0, 0, "");
     }
 
     public static List<PlantingVM> from(List<Planting> plantings, List<Producer> producers, List<Sort> sorts) {
@@ -33,6 +35,7 @@ public class PlantingVM {
             model.year =  planting.getYear();
             model.id = planting.getId();
             model.amount =  planting.getAmount();
+            model.location = planting.getLocation();
             try {
                 model.producerName = producers.stream().filter(p -> p.getId().equals(planting.getProducerId())).findFirst().get().getProducerName();
             } catch (Exception e) {
@@ -88,5 +91,11 @@ public class PlantingVM {
         this.year = (int) year;
     }
 
+    public String getLocation() {
+        return location;
+    }
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }

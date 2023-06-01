@@ -3,23 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <title>Producers</title>
+    <th:block th:include="header::head" />
+    <th:block th:include="header::body" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-success {
+            align-content: center;
+            justify-content: center;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .create-btn {
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <h1>List of Producers</h1>
-<ul>
-    <li th:each="producer : ${producers}">
-        <span th:text="${producer.producerName}"></span>
-        <form th:action="@{/admin/update/producer/{id}(id=${producer.id})}" method="post">
-            <input type="hidden" name="_method" value="post" />
-            <button type="submit">Update</button>
-        </form>
-        <form th:action="@{/admin/delete/producer/{id}(id=${producer.id})}" method="post">
-            <input type="hidden" name="_method" value="post" />
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<table>
+    <thead>
+    <tr>
+        <th>Producer Name</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="producer : ${producers}">
+        <td th:text="${producer.producerName}"></td>
+        <td>
+            <div class="btn-group">
+                <form th:action="@{/admin/update/producer/{id}(id=${producer.id})}" method="post">
+                    <input type="hidden" name="_method" value="post" />
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+                <form th:action="@{/admin/delete/producer/{id}(id=${producer.id})}" method="post">
+                    <input type="hidden" name="_method" value="post" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
-<p><a href="/admin/new/producer">Create new producer</a></p>
+<div class="center">
+    <a href="/admin/new/producer" class="btn btn-success create-btn">Create new producer</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

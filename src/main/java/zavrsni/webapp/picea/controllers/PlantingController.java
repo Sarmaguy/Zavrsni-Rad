@@ -52,12 +52,13 @@ public class PlantingController {
     }
 
     @PostMapping("/admin/save/planting/{id}")
-    public String savePlanting(@PathVariable("id") String id, @RequestParam("producerId") String producerId, @RequestParam("sortId") String sortId, @RequestParam("year") int year, @RequestParam("amount") int amount) {
+    public String savePlanting(@PathVariable("id") String id, @RequestParam("producerId") String producerId, @RequestParam("sortId") String sortId, @RequestParam("year") int year, @RequestParam("amount") int amount, @RequestParam String location) {
         Planting planting = Planting.get(db, id);
         planting.setProducerId(producerId);
         planting.setSortId(sortId);
         planting.setYear(year);
         planting.setAmount(amount);
+        planting.setLocation(location);
         Planting.update(db, planting);
         return "redirect:/admin/plantings";
     }

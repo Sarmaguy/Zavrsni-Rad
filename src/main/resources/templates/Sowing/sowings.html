@@ -3,23 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <title>Sowings</title>
+  <th:block th:include="header::head" />
+  <th:block th:include="header::body" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-success {
+      align-content: center;
+      justify-content: center;
+    }
+
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .create-btn {
+      margin-top: 20px;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 <h1>List of Sowings</h1>
-<ul>
-  <li th:each="sowing : ${sowings}">
-    <span th:text="${sowing.year}"></span> - <span th:text="${sowing.getSortName()}"></span> - <span th:text="${sowing.getProducerName()}"></span>
-    <form th:action="@{/admin/update/sowing/{id}(id=${sowing.id})}" method="post">
-      <input type="hidden" name="_method" value="post" />
-      <button type="submit">Update</button>
-    </form>
-    <form th:action="@{/admin/delete/sowing/{id}(id=${sowing.id})}" method="post">
-      <input type="hidden" name="_method" value="post" />
-      <button type="submit">Delete</button>
-    </form>
-  </li>
-</ul>
+<table>
+  <thead>
+  <tr>
+    <th>Year</th>
+    <th>Sort Name</th>
+    <th>Producer Name</th>
+    <th>Location</th>
+    <th>Action</th>
 
-<p><a href="/admin/new/sowing">Create new sowing</a></p>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="sowing : ${sowings}">
+    <td th:text="${sowing.year}"></td>
+    <td th:text="${sowing.getSortName()}"></td>
+    <td th:text="${sowing.getProducerName()}"></td>
+    <td th:text="${sowing.getLocation()}"></td>
+    <td>
+      <div class="btn-group">
+        <form th:action="@{/admin/update/sowing/{id}(id=${sowing.id})}" method="post">
+          <input type="hidden" name="_method" value="post" />
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+        <form th:action="@{/admin/delete/sowing/{id}(id=${sowing.id})}" method="post">
+          <input type="hidden" name="_method" value="post" />
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="center">
+  <form action="/admin/new/sowing">
+    <button type="submit" class="btn btn-success create-btn">Create new sowing</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

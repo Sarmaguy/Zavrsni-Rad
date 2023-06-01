@@ -16,6 +16,7 @@ public class ProductVM {
     private String productSize;
     private String description;
     String inPot;
+    private String pictureUrl;
 
     public ProductVM() {
     }
@@ -40,6 +41,7 @@ public class ProductVM {
             model.productSize = product.getProductSize();
             model.description = product.getDescription();
             model.inPot = product.isInPot() ? "Product is in pot" : "Product is not in pot";
+            model.pictureUrl = product.getPicture();
 
             try {
                 model.sortName = sorts.stream().filter(s -> s.getId().equals(product.getSortId())).findFirst().get().getSortName();
@@ -104,6 +106,7 @@ public class ProductVM {
         model.plantingInfo = String.valueOf(Planting.get(db, product.getPlantingId()).getYear());
         model.harvestInfo = String.valueOf(Harvest.get(db, product.getHarvestId()).getDate());
         model.priceInfo = String.valueOf(Pricing.get(db, product.getPriceId()).getPricingPrice());
+        model.pictureUrl = product.getPicture();
 
         return model;
     }
@@ -179,4 +182,11 @@ public class ProductVM {
     public void setInPot(String inPot) {
         this.inPot = inPot;
     }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;}
 }

@@ -35,19 +35,29 @@ public class ProductController {
         return "Product/products";
     }
 
-    @GetMapping("/admin/new/product")
-    public String showCreateProductForm(Model model) {
+    @GetMapping("/admin/new/product/sort")
+    public String showCreateSortForm(Model model) {
         List<Sort> sorts = Sort.getAll(db);
-        List<Sowing> sowings = Sowing.getAll(db);
-        List<Planting> plantings = Planting.getAll(db);
-        List<Harvest> harvests = Harvest.getAll(db);
-        List<Pricing> pricings = Pricing.getAll(db);
+        model.addAttribute("sorts", sorts);
+        model.addAttribute("sort", new Sort());
+        return "Product/choose-sort";
+    }
+
+    @PostMapping("/admin/new/product")
+    public String showCreateProductForm(@RequestParam("sortId") String sortId, Model model) {
+        Sort sort = Sort.get(db, sortId);
+        List<Sowing> sowings = Sowing.getAll(db).stream().filter(s -> s.getSortId().equals(sort.getId())).toList();
+        List<Planting> plantings = Planting.getAll(db).stream().filter(s -> s.getSortId().equals(sort.getId())).toList();
+        List<Harvest> harvests = Harvest.getAll(db).stream().filter(s -> s.getSortId().equals(sort.getId())).toList();
+        List<Pricing> pricings = Pricing.getAll(db).stream().filter(s -> s.getSortId().equals(sort.getId())).toList();
+        Product product = new Product();
+        product.setSortId(sort.getId());
         model.addAttribute("sowings", sowings);
         model.addAttribute("plantings", plantings);
         model.addAttribute("harvests", harvests);
         model.addAttribute("pricings", pricings);
-        model.addAttribute("sorts", sorts);
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", product);
+        model.addAttribute("sort", sort);
         return "Product/create-product";
     }
 
@@ -66,7 +76,8 @@ public class ProductController {
                            @RequestParam("priceId") String priceId,
                            @RequestParam("productSize") String productSize,
                            @RequestParam("description") String description,
-                           @RequestParam("inPot") boolean inPot) {
+                           @RequestParam("inPot") boolean inPot,
+                            @RequestParam("picture") String picture) {
         Product product = Product.get(db, id);
         product.setSortId(sortId);
         product.setSowingId(sowingId);
@@ -76,6 +87,7 @@ public class ProductController {
         product.setProductSize(productSize);
         product.setDescription(description);
         product.setInPot(inPot);
+        product.setPicture(picture);
         Product.update(db, product);
         return "redirect:/admin/products";
     }

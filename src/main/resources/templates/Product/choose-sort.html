@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Edit Sort</title>
+  <title>Create new Product</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
     body {
@@ -19,7 +19,8 @@
     label {
       font-weight: bold;
     }
-    input[type="text"] {
+    input[type="text"],
+    select {
       width: 100%;
       padding: 8px;
       margin-bottom: 10px;
@@ -27,7 +28,10 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
-    button[type="submit"] {
+    input[type="checkbox"] {
+      margin-top: 10px;
+    }
+    input[type="submit"] {
       display: block;
       width: 100%;
       padding: 10px;
@@ -43,17 +47,18 @@
   </style>
 </head>
 <body>
-<h1>Edit Sort</h1>
-<form th:action="@{/admin/save/sort/{id}(id=${sort.id})}" method="post">
+<h1>Choose sort of Product</h1>
+<form action="/admin/new/product" method="post">
   <div class="form-group">
-    <label for="sortName">Name:</label>
-    <input type="text" id="sortName" name="sortName" th:value="${sort.sortName}" class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="latin">Latin name:</label>
-    <input type="text" id="latin" name="latin" th:value="${sort.latin}" class="form-control" />
-  </div>
-  <button type="submit" class="btn btn-primary">Save</button>
+    <label for="sortId">Sort name:</label>
+    <select id="sortId" name="sortId" class="form-control">
+      <option th:each="sort : ${sorts}" th:value="${sort.id}" th:text="${sort.sortName}"></option>
+    </select>
+
+
+  </div><br>
+
+  <input type="submit" value="Submit" class="btn btn-primary">
 </form>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

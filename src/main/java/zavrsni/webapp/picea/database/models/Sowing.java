@@ -11,20 +11,22 @@ public class Sowing extends DatabaseModel {
     private String producerId;
     private String sortId;
     private int year;
+    private String location;
 
-    public Sowing(String id, String producerId, String sortId, int year) {
+    public Sowing(String id, String producerId, String sortId, int year, String location) {
         super(id);
         this.producerId = producerId;
         this.sortId = sortId;
         this.year = year;
+        this.location = location;
     }
 
-    public Sowing(String producerId, String sortId, int year) {
-        this("", producerId, sortId, year);
+    public Sowing(String producerId, String sortId, int year, String location) {
+        this("", producerId, sortId, year, location);
     }
 
     public Sowing() {
-        this("", "", "", 0);
+        this("", "", "", 0, "");
     }
 
     public String getProducerId() {
@@ -50,6 +52,15 @@ public class Sowing extends DatabaseModel {
     public void setYear(int year) {
         this.year = year;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
 
     @Override
     public String toString() {

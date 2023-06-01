@@ -1,24 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:include="header::head" />
+    <th:block th:include="header::body" />
     <meta charset="UTF-8">
     <title>Pricing List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-success {
+            align-content: center;
+            justify-content: center;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .create-btn {
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <h1>List of Pricings</h1>
-<ul>
-    <li th:each="pricing : ${pricings}">
-        <span th:text="${pricing.getSortName()}"></span> - <span th:text="${pricing.getPrice()}"></span> - <span th:text="${pricing.getSize()}"></span> - <span th:text="${pricing.getSeason()}"></span>
-        <form th:action="@{/admin/update/pricing/{id}(id=${pricing.getId()})}" method="post">
-            <input type="hidden" name="_method" value="post" />
-            <button type="submit">Update</button>
-        </form>
-        <form th:action="@{/admin/delete/pricing/{id}(id=${pricing.getId()})}" method="post">
-            <input type="hidden" name="_method" value="post" />
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
-<p><a href="/admin/new/pricing">Create new pricing</a></p>
+<table>
+    <thead>
+    <tr>
+        <th>Sort Name</th>
+        <th>Price</th>
+        <th>Size</th>
+        <th>Season</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pricing : ${pricings}">
+        <td th:text="${pricing.getSortName()}"></td>
+        <td th:text="${pricing.getPrice()}"></td>
+        <td th:text="${pricing.getSize()}"></td>
+        <td th:text="${pricing.getSeason()}"></td>
+        <td>
+            <div class="btn-group">
+                <form th:action="@{/admin/update/pricing/{id}(id=${pricing.getId()})}" method="post">
+                    <input type="hidden" name="_method" value="post" />
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+                <form th:action="@{/admin/delete/pricing/{id}(id=${pricing.getId()})}" method="post">
+                    <input type="hidden" name="_method" value="post" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="center">
+    <a href="/admin/new/pricing" class="btn btn-success create-btn">Create new sort</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

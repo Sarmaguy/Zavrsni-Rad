@@ -2,21 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="/webjars/chartjs/2.9.4/Chart.min.js"></script>
+    <title>Picea</title>
+    <th:block th:include="header::head" />
+    <th:block th:include="header::body" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .product-card {
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px; /* Adjust the height as needed */
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
 
-<ul>
-    <li th:each="product : ${products}">
-        <a th:href="@{/product/{id}(id=${product.id})}"><span th:text="${product.getSortName()} + ' - ' + ${product.priceInfo}+ ' - ' + ${product.getProductSize()} "></span></a>
-    </li>
-</ul>
+<div class="container">
+    <div class="row">
+        <ul class="list-unstyled d-flex flex-wrap">
+            <li class="col-md-3" th:each="product : ${products}">
+                <div class="product-card">
+                    <a th:href="@{/product/{id}(id=${product.id})}">
+                        <img th:src="${product.getPictureUrl()}" alt="Product Image" class="product-image">
+                        <span th:text="${product.getSortName()} + ' - ' + ${product.priceInfo}"></span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 
-<form method="post" enctype="multipart/form-data" action="/upload">
-    <input type="file" name="file" /><br /><br />
-    <input type="submit" value="Upload" />
-</form>
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

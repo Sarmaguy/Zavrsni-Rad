@@ -1,19 +1,60 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example </title>
+    <title>Log in</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <th:block th:include="header::head" />
+    <th:block th:include="header::body" />
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/5410137/pexels-photo-5410137.jpeg");
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-box {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="login-box">
+
+                <h2>Login</h2>
+                <div style="color: red" th:if="${param.error}">
+                    Invalid username and password.
+                </div>
+                <form th:action="@{/login}" method="post">
+                    <div class="form-group">
+                        <label> User Name : <input type="text" name="username" placeholder="Enter your username"/> </label>
+                    </div>
+                    <div class="form-group">
+                        <label> Password: <input type="password" name="password" placeholder="Enter your password"/> </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+
+
 </body>
 </html>

@@ -3,6 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Product</title>
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select,
+        input[type="text"],
+        input[type="checkbox"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 <h1>Edit Product</h1>
@@ -32,9 +83,11 @@
     <input type="text" id="productSize" name="productSize" th:value="${product.productSize}"><br><br>
     <label for="description">Description:</label>
     <input type="text" id="description" name="description" th:value="${product.description}"><br><br>
+    <label for="picture">Picture URL:</label>
+    <input type="text" id="picture" name="picture" th:value="${product.picture}"><br><br>
     <label for="inPot">In Pot:</label>
     <input type="checkbox" id="inPot" name="inPot" value="true" th:checked="${product.inPot}"><br><br>
-    <input type="submit">
+    <input type="submit" value="Save">
 </form>
 </body>
 </html>

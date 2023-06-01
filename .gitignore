@@ -33,3 +33,4 @@ build/
 .vscode/
 
 appsettings.json
+node_modules/

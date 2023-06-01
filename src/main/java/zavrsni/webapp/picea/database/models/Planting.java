@@ -12,21 +12,23 @@ public class Planting extends DatabaseModel {
     private String sortId;
     private int amount;
     private int year;
+    private String location;
 
-    public Planting(String id, String producerId, String sortId, int amount, int year) {
+    public Planting(String id, String producerId, String sortId, int amount, int year, String location) {
         super(id);
         this.producerId = producerId;
         this.sortId = sortId;
         this.amount = amount;
         this.year = year;
+        this.location = location;
     }
 
-    public Planting(String producerId, String sortId, int amount, int year) {
-        this("", producerId, sortId, amount, year);
+    public Planting(String producerId, String sortId, int amount, int year, String location) {
+        this("", producerId, sortId, amount, year, location);
     }
 
     public Planting() {
-        this("", "", "", 0, 0);
+        this("", "", "", 0, 0, "");
     }
 
     public String getProducerId() {
@@ -59,6 +61,14 @@ public class Planting extends DatabaseModel {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @Override

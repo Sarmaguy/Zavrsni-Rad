@@ -3,22 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Plantings</title>
+    <th:block th:include="header::head" />
+    <th:block th:include="header::body" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <h1>List of Plantings</h1>
-<ul>
-    <li th:each="planting : ${plantings}">
-        <span th:text="${planting.getProducerName()}"></span> - <span th:text="${planting.getSortName()}"></span> - <span th:text="${planting.amount}"></span> - <span th:text="${planting.year}"></span>
-        <form th:action="@{/admin/update/planting/{id}(id=${planting.id})}" method="post">
-            <input type="hidden" name="_method" value="post" />
-            <button type="submit">Update</button>
-        </form>
-        <form th:action="@{/admin/delete/planting/{id}(id=${planting.id})}" method="post">
-            <input type="hidden" name="_method" value="post" />
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
-<p><a href="/admin/new/planting">Create new planting</a></p>
+<table>
+    <thead>
+    <tr>
+        <th>Producer Name</th>
+        <th>Sort Name</th>
+        <th>Amount</th>
+        <th>Year</th>
+        <th>Location</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="planting : ${plantings}">
+        <td th:text="${planting.getProducerName()}"></td>
+        <td th:text="${planting.getSortName()}"></td>
+        <td th:text="${planting.amount}"></td>
+        <td th:text="${planting.year}"></td>
+        <td th:text="${planting.getLocation()}"></td>
+        <td>
+            <div class="btn-group">
+                <form th:action="@{/admin/update/planting/{id}(id=${planting.id})}" method="post">
+                    <input type="hidden" name="_method" value="post"/>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+                <form th:action="@{/admin/delete/planting/{id}(id=${planting.id})}" method="post">
+                    <input type="hidden" name="_method" value="post"/>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p><a href="/admin/new/planting" class="btn btn-success">Create new planting</a></p>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

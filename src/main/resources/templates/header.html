@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Picea</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .header {
+            padding: 20px;
+            background-color: #67b867;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .app-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .links a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s ease-in-out;
+        }
+        .links a:hover {
+            color: #fff7a5;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="app-name">Picea</div>
+        <div class="links">
+            <a href="/" th:text="'Home'"></a>
+            <a href="/admin/panel" th:text="'Admin Panel'"></a>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

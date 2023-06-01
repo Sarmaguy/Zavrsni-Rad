@@ -44,18 +44,19 @@ public class SowingController {
     }
 
     @PostMapping("/admin/save/sowing")
-    public String saveSowing(@RequestParam("producerId") String producerId, @RequestParam("sortId") String sortId, @RequestParam("year") int year) {
-        Sowing sowing = new Sowing(producerId, sortId, year);
+    public String saveSowing(@RequestParam("producerId") String producerId, @RequestParam("sortId") String sortId, @RequestParam("year") int year, @RequestParam String location) {
+        Sowing sowing = new Sowing(producerId, sortId, year, location);
         Sowing.create(db, sowing);
         return "redirect:/admin/sowings";
     }
 
     @PostMapping("/admin/save/sowing/{id}")
-    public String saveSowing(@PathVariable("id") String id, @RequestParam("producerId") String producerId, @RequestParam("sortId") String sortId, @RequestParam("year") int year) {
+    public String saveSowing(@PathVariable("id") String id, @RequestParam("producerId") String producerId, @RequestParam("sortId") String sortId, @RequestParam("year") int year, @RequestParam String location) {
         Sowing sowing = Sowing.get(db, id);
         sowing.setProducerId(producerId);
         sowing.setSortId(sortId);
         sowing.setYear(year);
+        sowing.setLocation(location);
         Sowing.update(db, sowing);
         return "redirect:/admin/sowings";
     }
