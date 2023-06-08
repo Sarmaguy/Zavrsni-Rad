@@ -75,13 +75,13 @@
     </div><br>
     <div class="form-group">
         <label for="priceId">Price:</label>
-        <select id="priceId" name="priceId" class="form-control">
+        <select id="priceId" name="priceId" class="form-control" required>
             <option th:each="price : ${pricings}" th:value="${price.id}" th:text="${price.pricingPrice}"></option>
         </select>
     </div><br>
     <div class="form-group">
         <label for="productSize">Size:</label>
-        <input type="text" id="productSize" name="productSize" class="form-control">
+        <input type="text" id="productSize" name="productSize" class="form-control" required>
     </div><br>
     <div class="form-group">
         <label for="description">Description:</label>

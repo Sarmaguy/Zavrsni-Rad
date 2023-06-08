@@ -79,15 +79,15 @@
   </div>
   <div>
     <label for="amount">Amount:</label>
-    <input type="text" id="amount" name="amount" th:value="${planting.amount}" />
+    <input type="text" id="amount" name="amount" th:value="${planting.amount}" required/>
   </div>
   <div>
     <label for="year">Year:</label>
-    <input type="text" id="year" name="year" th:value="${planting.year}" />
+    <input type="text" id="year" name="year" th:value="${planting.year}" required/>
   </div>
     <div>
         <label for="location">location:</label>
-        <input type="text" id="location" name="location" th:value="${planting.location}" />
+        <input type="text" id="location" name="location" th:value="${planting.location}" required/>
     </div>
   <button type="submit">Save</button>
 </form>

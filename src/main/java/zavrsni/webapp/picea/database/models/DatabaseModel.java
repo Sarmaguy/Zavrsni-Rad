@@ -66,7 +66,7 @@ public abstract class DatabaseModel {
         T model;
 
         try {
-            model = db.document(path).get().get().toObject(t);
+            model = db. document(path).get().get().toObject(t);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

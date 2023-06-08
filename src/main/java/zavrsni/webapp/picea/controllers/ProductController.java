@@ -76,8 +76,7 @@ public class ProductController {
                            @RequestParam("priceId") String priceId,
                            @RequestParam("productSize") String productSize,
                            @RequestParam("description") String description,
-                           @RequestParam("inPot") boolean inPot,
-                            @RequestParam("picture") String picture) {
+                           @RequestParam("inPot") boolean inPot, @RequestParam("picture") String picture) {
         Product product = Product.get(db, id);
         product.setSortId(sortId);
         product.setSowingId(sowingId);
@@ -96,11 +95,11 @@ public class ProductController {
     @PostMapping("/admin/update/product/{id}")
     public String updateProduct(@PathVariable("id") String id, Model model) {
         Product product = Product.get(db, id);
-        List<Sort> sorts = Sort.getAll(db);
-        List<Sowing> sowings = Sowing.getAll(db);
-        List<Planting> plantings = Planting.getAll(db);
-        List<Harvest> harvests = Harvest.getAll(db);
-        List<Pricing> pricings = Pricing.getAll(db);
+        List<Sort> sorts = Sort.getAll(db).stream().filter(s -> s.getId().equals(product.getSortId())).toList();
+        List<Sowing> sowings = Sowing.getAll(db).stream().filter(s -> s.getSortId().equals(product.getSortId())).toList();
+        List<Planting> plantings = Planting.getAll(db).stream().filter(s -> s.getSortId().equals(product.getSortId())).toList();
+        List<Harvest> harvests = Harvest.getAll(db).stream().filter(s -> s.getSortId().equals(product.getSortId())).toList();
+        List<Pricing> pricings = Pricing.getAll(db).stream().filter(s -> s.getSortId().equals(product.getSortId())).toList();
         model.addAttribute("sowings", sowings);
         model.addAttribute("plantings", plantings);
         model.addAttribute("harvests", harvests);

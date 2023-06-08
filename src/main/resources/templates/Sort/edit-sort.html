@@ -47,7 +47,7 @@
 <form th:action="@{/admin/save/sort/{id}(id=${sort.id})}" method="post">
   <div class="form-group">
     <label for="sortName">Name:</label>
-    <input type="text" id="sortName" name="sortName" th:value="${sort.sortName}" class="form-control" />
+    <input type="text" id="sortName" name="sortName" th:value="${sort.sortName}" class="form-control" required/>
   </div>
   <div class="form-group">
     <label for="latin">Latin name:</label>

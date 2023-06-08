@@ -59,7 +59,7 @@
 <form th:action="@{/admin/save/pricing/{id}(id=${pricing.id})}" method="post">
   <div>
     <label for="size">Size:</label>
-    <input type="text" id="size" name="pricingSize" th:value="${pricing.pricingSize}" />
+    <input type="text" id="size" name="pricingSize" th:value="${pricing.pricingSize}" required/>
   </div>
   <div>
     <label for="sort">Sort:</label>
@@ -73,11 +73,11 @@
   </div>
   <div>
     <label for="price">Price:</label>
-    <input type="text" id="price" name="pricingPrice" th:value="${pricing.pricingPrice}" />
+    <input type="text" id="price" name="pricingPrice" th:value="${pricing.pricingPrice}" required/>
   </div>
   <div>
     <label for="season">Season:</label>
-    <input type="text" id="season" name="season" th:value="${pricing.season}" />
+    <input type="text" id="season" name="season" th:value="${pricing.season}" required/>
   </div>
   <button type="submit">Save</button>
 </form>

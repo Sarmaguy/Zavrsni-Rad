@@ -76,18 +76,33 @@
         <option th:each="harvest : ${harvests}" th:value="${harvest.id}" th:text="${harvest.date}" th:selected="${harvest.id == product.harvestId}"></option>
     </select><br><br>
     <label for="priceId">Price:</label>
-    <select id="priceId" name="priceId">
+    <select id="priceId" name="priceId" required>
         <option th:each="price : ${pricings}" th:value="${price.id}" th:text="${price.pricingPrice}" th:selected="${price.id == product.priceId}"></option>
     </select><br><br>
     <label for="productSize">Size:</label>
-    <input type="text" id="productSize" name="productSize" th:value="${product.productSize}"><br><br>
+    <input type="text" id="productSize" name="productSize" th:value="${product.productSize}" required><br><br>
     <label for="description">Description:</label>
     <input type="text" id="description" name="description" th:value="${product.description}"><br><br>
     <label for="picture">Picture URL:</label>
     <input type="text" id="picture" name="picture" th:value="${product.picture}"><br><br>
-    <label for="inPot">In Pot:</label>
-    <input type="checkbox" id="inPot" name="inPot" value="true" th:checked="${product.inPot}"><br><br>
+    <label >In Pot:</label>
+    <input type="hidden" id="inPotHidden" name="inPot" th:value="${product.inPot}">
+    <input type="checkbox" id="inPotCheckbox" name="inPotCheckbox" value="true" th:checked="${product.inPot}" onclick="updateInPotValue()">
+    <br><br>
     <input type="submit" value="Save">
 </form>
+
+<script>
+    function updateInPotValue() {
+        var checkbox = document.getElementById('inPotCheckbox');
+        var hiddenInput = document.getElementById('inPotHidden');
+
+        if (checkbox.checked) {
+            hiddenInput.value = 'true';
+        } else {
+            hiddenInput.value = 'false';
+        }
+    }
+</script>
 </body>
 </html>

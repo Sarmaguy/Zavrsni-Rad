@@ -15,8 +15,14 @@ public class ProductVM {
     private String priceInfo;
     private String productSize;
     private String description;
-    String inPot;
+
+
+    private String inPot;
     private String pictureUrl;
+
+
+
+    private boolean reserved;
 
     public ProductVM() {
     }
@@ -30,6 +36,22 @@ public class ProductVM {
         this.priceInfo = priceInfo;
         this.productSize = productSize;
         this.description = description;
+    }
+
+    public static List<ProductVM> from(List<Product> products, List<Sort> sorts, List<Sowing> sowings, List<Planting> plantings, List<Harvest> harvests, List<Pricing> pricings, List<Reservation> reservations) {
+        List<ProductVM> models = from(products, sorts, sowings, plantings, harvests, pricings);
+
+        models.forEach(model -> model.reserved = reservations.stream().anyMatch(r -> r.getProductId().equals(model.id)));
+
+        return models;
+    }
+
+    public boolean isReserved() {
+        return reserved;
+    }
+
+    public String getInPot() {
+        return inPot;
     }
 
     public static List<ProductVM> from(List<Product> products, List<Sort> sorts, List<Sowing> sowings, List<Planting> plantings, List<Harvest> harvests, List<Pricing> pricings) {

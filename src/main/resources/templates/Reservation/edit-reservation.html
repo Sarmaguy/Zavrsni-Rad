@@ -57,8 +57,8 @@
 <h1>Edit Reservation</h1>
 <form th:action="@{/admin/save/reservation/{id}(id=${reservation.id})}" method="post">
     <div>
-        <label for="productId">Product ID:</label>
-        <select id="productId" name="productId">
+        <label hidden for="productId">Product ID:</label>
+        <select id="productId" name="productId" hidden>
             <option th:each="product : ${products}"
                     th:value="${product.id}"
                     th:text="${product.id}"
@@ -68,15 +68,15 @@
     </div>
     <div>
         <label for="reservationName">Name:</label>
-        <input type="text" id="reservationName" name="reservationName" th:value="${reservation.reservationName}" />
+        <input type="text" id="reservationName" name="reservationName" th:value="${reservation.reservationName}" required/>
     </div>
     <div>
         <label for="reservationSurname">Surname:</label>
-        <input type="text" id="reservationSurname" name="reservationSurname" th:value="${reservation.reservationSurname}" />
+        <input type="text" id="reservationSurname" name="reservationSurname" th:value="${reservation.reservationSurname}" required/>
     </div>
     <div>
         <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" th:value="${reservation.phoneNumber}" />
+        <input type="text" id="phoneNumber" name="phoneNumber" th:value="${reservation.phoneNumber}" required/>
     </div>
     <div>
         <label for="info">Info:</label>
